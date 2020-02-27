@@ -1,72 +1,83 @@
 $(function() {
+  // 只要导入了 layui.all.js 脚本，就可以使用 layui.form
   var form = layui.form;
   var layer = layui.layer;
-  //点击去注册,跳转
-  $("#link-reg").on("click", function() {
-    $(".reg-box").show(); //显示
-    $(".login-box").hide(); //隐藏
-  });
-  $("#link-login").on("click", function() {
-    $(".login-box").show(); //显示
-    $(".reg-box").hide(); //隐藏
-  });
-  //表单验证
-  form.verify({
-    // //这是对于注册用户名的验证
-    // uName: function(value, item) {
-    //   //value：表单的值、item：表单的DOM对象
 
-    //   if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-    //     return "用户名不能有特殊字符";
-    //   }
-    //   if (/(^\_)|(\__)|(\_+$)/.test(value)) {
-    //     return "用户名首尾不能出现下划线'_'";
-    //   }
-    //   if (/^\d+\d+\d$/.test(value)) {
-    //     return "用户名不能全为数字";
-    //   }
-    // },
+  // 点击了注册的链接
+  $("#link-reg").on("click", function() {
+    $(".login-box").hide(); // 隐藏
+    $(".reg-box").show(); // 展示
+  });
+
+  // 点击了登录的链接
+  $("#link-login").on("click", function() {
+    $(".login-box").show(); // 展示
+    $(".reg-box").hide(); // 隐藏
+  });
+
+  // 自定义校验规则
+  form.verify({
+    // 键：值
     pwd: [/^[\S]{6,12}$/, "密码必须6到12位，且不能出现空格"],
     samePwd: function(value) {
-      var respwd = $(".reg-box [name=password]").val();
-      if (value !== respwd) {
-        return "两次密码不一致";
+      // 1. 通过形参，获取到确认密码框中的值
+      // 2. 通过 jQuery 获取到密码框中的值
+      var pwd = $(".reg-box [name=password]").val();
+      // 3. 进行 if 判断
+      if (value !== pwd) {
+        // return 一个错误消息
+        return "两次的密码不一致！";
       }
     }
   });
-  //发送注册表单验证请求 #form-reg
-  $("#form_reg").on("submit", function(e) {
-    //阻止表单跳转
+
+  // 监听注册表单的提交事件
+  $("#form-reg").on("submit", function(e) {
+    // 1. 阻止表单的默认提交行为
     e.preventDefault();
-    //发起ajax请求
+    // 2. 发起Ajax请求
     $.ajax({
+      // 指定请求的方式
       type: "POST",
+      // 指定请求的 URL 地址
+      // 注意：必须是 【请求根路径】 拼接上 【具体的 URL 地址】
       url: "http://www.liulongbin.top:3007/api/reguser",
+      // 指定请求的数据
       data: $(this).serialize(),
+      // 指定成功的回调函数
       success: function(res) {
         if (res.status !== 0) {
+          // 注册失败
           return layer.msg(res.message);
         }
-        layer.msg("注册成功,请登录");
+        // 如果没有被 return 出去，证明注册成功
+        layer.msg("注册成功，请登录！");
+        // 主动切换到登录的表单
         $("#link-login").click();
       }
     });
   });
-  //发送表单验证,登录 #form_login
+
+  // 监听登录表单的提交事件
   $("#form-login").on("submit", function(e) {
+    // 1. 阻止默认提交行为
     e.preventDefault();
+    // 2. 手动发起 ajax 请求
     $.ajax({
       type: "POST",
       url: "http://www.liulongbin.top:3007/api/login",
       data: $(this).serialize(),
       success: function(res) {
+        // 先使用 if 判断失败的请求，然后 return 出去
+        // 如果没有被 return 出去，那就是成功了
         if (res.status !== 0) {
-          //提示登录失败
-          return layer.msg("登录失败");
+          return layer.msg("登录失败！");
         }
-        layer.msg("登陆成功");
+        // 提示用户登录成功
+        layer.msg("登录成功！");
+        // 将服务器颁发的 token 字符串，持久化存储到 localStorage
         localStorage.setItem("token", res.token);
-        //跳转到index页面
+        // 跳转到后台首页
         location.href = "/index.html";
       }
     });

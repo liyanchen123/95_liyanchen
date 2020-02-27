@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
-  <!-- 导入layui样式 -->
+  <title>Document</title>
+  <!-- 导入 layui 的样式 -->
   <link rel="stylesheet" href="/assets/lib/layui/css/layui.css" />
   <!-- 导入自己的样式 -->
+  <!-- 在开发中，尽量不要使用  ./  和 ../ 去写路径 -->
   <link rel="stylesheet" href="/assets/css/login.css" />
-  <!-- 导入字体图标 -->
-  <link rel="stylesheet" href="/assets/fonts/iconfont.css" />
 </head>
 
 <body>
@@ -26,26 +25,24 @@
     <!-- 登录的盒子 -->
     <div class="login-box">
       <!-- 登录的表单 -->
-      <form class="layui-form" id="form_login">
+      <form class="layui-form" id="form-login">
         <!-- 表单行 -->
         <div class="layui-form-item">
           <!-- 图标 -->
           <i class="layui-icon layui-icon-username"></i>
           <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off"
-            class="layui-input" />
+            class="layui-input">
         </div>
         <!-- 第二行 -->
         <div class="layui-form-item">
           <!-- 图标 -->
           <i class="layui-icon layui-icon-password"></i>
           <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off"
-            class="layui-input" />
+            class="layui-input">
         </div>
         <!-- 第三行 -->
         <div class="layui-form-item">
-          <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit lay-filter="formDemo">
-            登录
-          </button>
+          <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit lay-filter="formDemo">登录</button>
         </div>
         <!-- 第四行 -->
         <div class="layui-form-item links">
@@ -64,25 +61,23 @@
           <!-- lay-verify 属性表示要添加验证规则 -->
           <!-- required 表示必填项 -->
           <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off"
-            class="layui-input" />
+            class="layui-input">
         </div>
         <!-- 第二行 -->
         <div class="layui-form-item">
           <i class="layui-icon layui-icon-password"></i>
           <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
-            autocomplete="off" class="layui-input" />
+            autocomplete="off" class="layui-input">
         </div>
         <!-- 第三行 -->
         <div class="layui-form-item">
           <i class="layui-icon layui-icon-password"></i>
           <input type="password" name="repassword" required lay-verify="required|pwd|samePwd" placeholder="请确认密码"
-            autocomplete="off" class="layui-input" />
+            autocomplete="off" class="layui-input">
         </div>
         <!-- 第4行 -->
         <div class="layui-form-item">
-          <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="formDemo">
-            注册
-          </button>
+          <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="formDemo">注册</button>
         </div>
         <!-- 第5行 -->
         <div class="layui-form-item links">
@@ -97,7 +92,7 @@
   <!-- 一定要在页面的最底部，导入所有的 script 脚本 -->
   <script src="/assets/lib/jquery.js"></script>
   <!-- 导入自己的 js -->
-  <script src="/assets/js/longin.js"></script>
+  <script src="/assets/js/login.js"></script>
 </body>
 
 </html>
