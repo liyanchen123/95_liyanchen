@@ -34,8 +34,8 @@ $(function() {
       }
     }
   });
-  //发送表单验证请求 #form_login
-  $("#form_login").on("submit", function(e) {
+  //发送注册表单验证请求 #form-reg
+  $("#form_reg").on("submit", function(e) {
     e.preventDefault();
     $.ajax({
       methods: "post",
@@ -43,15 +43,15 @@ $(function() {
       data: $(this).serialize(),
       success: function(res) {
         if (res.status !== 0) {
-          return "注册失败";
+          return layer.msg(res.message);
         }
         layer.msg("注册成功");
         $("#link-login").click();
       }
     });
   });
-  //发送表单验证,登录#form-reg
-  $("#form-reg").on("submit", function(e) {
+  //发送表单验证,登录 #form_login
+  $("#form-login").on("submit", function(e) {
     e.preventDefault();
     $.ajax({
       type: "post",
@@ -60,9 +60,9 @@ $(function() {
       success: function(res) {
         if (res.status !== 0) {
           //提示登录失败
-          return layer.msg(res.message);
+          return layer.msg("登录失败");
         }
-        layer.msg(res.message);
+        layer.msg("登陆成功");
         localStorage.setItem("token", res.token);
         //跳转到index页面
         location.href = "/index.html";
