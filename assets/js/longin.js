@@ -36,16 +36,18 @@ $(function() {
   });
   //发送注册表单验证请求 #form-reg
   $("#form_reg").on("submit", function(e) {
+    //阻止表单跳转
     e.preventDefault();
+    //发起ajax请求
     $.ajax({
-      methods: "post",
+      methods: "POST",
       url: "http://www.liulongbin.top:3007/api/reguser",
       data: $(this).serialize(),
       success: function(res) {
         if (res.status !== 0) {
           return layer.msg(res.message);
         }
-        layer.msg("注册成功");
+        layer.msg("注册成功,请登录");
         $("#link-login").click();
       }
     });
@@ -54,7 +56,7 @@ $(function() {
   $("#form-login").on("submit", function(e) {
     e.preventDefault();
     $.ajax({
-      type: "post",
+      type: "POST",
       url: "http://www.liulongbin.top:3007/api/login",
       data: $(this).serialize(),
       success: function(res) {
