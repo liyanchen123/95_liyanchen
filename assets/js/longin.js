@@ -40,7 +40,7 @@ $(function() {
     e.preventDefault();
     //发起ajax请求
     $.ajax({
-      methods: "POST",
+      type: "POST",
       url: "http://www.liulongbin.top:3007/api/reguser",
       data: $(this).serialize(),
       success: function(res) {
