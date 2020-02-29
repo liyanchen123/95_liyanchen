@@ -46,6 +46,7 @@ $(function () {
       data: $(this).serialize(),
       // 指定成功的回调函数
       success: function (res) {
+        console.log(res);
         if (res.status !== 0) {
           // 注册失败
           return layer.msg(res.message);
